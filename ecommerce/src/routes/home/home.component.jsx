@@ -32,9 +32,7 @@ function Home() {
 
   return (
     <div>
-      <Outlet/>
       <Directory categories={categories} />
-
     </div>
   );
 }
