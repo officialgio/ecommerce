@@ -1,0 +1,11 @@
+@import '/src/global-styles/variable';
+
+$--gap-space: calc($--gap-padding * 6);
+
+.authentication-container {
+    display: flex;
+    width: 100%;
+    gap: $--gap-space;
+    margin: 4rem;
+    padding: calc($--container-padding * 3);
+}
