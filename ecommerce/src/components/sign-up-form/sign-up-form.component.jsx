@@ -53,7 +53,7 @@ const SignUpForm = () => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value });
   };
-
+ 
   return (
     <div className="sign-up-container">
       <h2>Don't have an account?</h2>
