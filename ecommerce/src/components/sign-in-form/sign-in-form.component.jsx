@@ -28,6 +28,8 @@ const SignInForm = () => {
     await signInWithGooglePopUp();
   };
 
+  // When submit the user should be able to sign in with their account
+  // Reset the fields afterwards to make the forms re-render
   const handleSubmit = async (event) => {
     event.preventDefault();
 
