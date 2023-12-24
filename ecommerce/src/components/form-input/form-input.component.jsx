@@ -5,9 +5,8 @@ const FormInput = ({ label, ...otherProps }) => {
   const labelClassName = `${
     otherProps.value.length ? "shrink" : ""
     } form-input-label `;
+  
   // Reuse the component
-
-  console.log(...otherProps.value)
   return (
     <div className="group">
       <input className="form-input" {...otherProps} />
