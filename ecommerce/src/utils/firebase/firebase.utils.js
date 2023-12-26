@@ -12,6 +12,7 @@ import {
 
 import {
   collection,
+  writeBatch,
   getFirestore,
   doc,
   getDoc,
@@ -40,6 +41,23 @@ export const auth = getAuth();
 export const signInWithGooglePopUp = () => signInWithPopup(auth, provider);
 
 export const db = getFirestore();
+
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  // Get the collection
+  const collectionRef = collection(db, collectionKey);
+  const batch = writeBatch(db);
+
+  // Set the doc respectively
+  objectsToAdd.forEach((object) => {
+    const docRef = doc(collectionRef, object.title.toLowerCase());
+    batch.set(docRef, object);
+  });
+  await batch.commit();
+  console.log("Done batching!");
+};
 
 export const createUserDocumentFromAuth = async (
   userAuth,

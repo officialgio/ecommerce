@@ -59,8 +59,6 @@ export const CartProvider = ({ children }) => {
   const [cartCount, setCartCount] = useState(0);
   const [cartTotal, setCartTotal] = useState(0);
 
-  console.log(cartItems);
-
   // Compute cart count when user picks a new item to be added to cart
   useEffect(() => {
     const newCartCount = cartItems.reduce(
