@@ -9,34 +9,39 @@ import { UserContext } from "../../context/user.context";
 import { CartContext } from "../../context/cart.context";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 
-import "./navigation.styles.scss";
+import {
+  NavigationContainer,
+  NavLinks,
+  NavLink,
+  LogoContainer,
+} from "./navigation.styles";
+
+// import "./navigation.styles.scss";
 
 // This is our top-level component
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
-  const { isCartOpen } = useContext(CartContext)
-  
+  const { isCartOpen } = useContext(CartContext);
+
   return (
     <Fragment>
-      <div className="navigation">
-        <Link className="logo-container" to="/">
+      <NavigationContainer>
+        <LogoContainer className="logo-container" to="/">
           <CrownLogo className="logo" />
-        </Link>
-        <div className="nav-links-container">
-          <Link className="nav-link" to="/shop">
-            Shop
-          </Link>
+        </LogoContainer>
+        <NavLinks>
+          <NavLink to="/shop">Shop</NavLink>
           {currentUser ? (
-            <span className="nav-link" onClick={signOutUser}>Sign Out</span>
+            <NavLink as="span" onClick={signOutUser}>
+              Sign Out
+            </NavLink>
           ) : (
-            <Link className="nav-link" to="/auth">
-              Sign in
-            </Link>
+            <NavLink to="/auth">Sign in</NavLink>
           )}
-          <CartIcon/>
-        </div>
-        {isCartOpen && <CartDropDown/> }
-      </div>
+          <CartIcon />
+        </NavLinks>
+        {isCartOpen && <CartDropDown />}
+      </NavigationContainer>
       {/* Outlet will renders those components depending on the route */}
       <Outlet />
     </Fragment>
@@ -44,4 +49,3 @@ const Navigation = () => {
 };
 
 export default Navigation;
-
