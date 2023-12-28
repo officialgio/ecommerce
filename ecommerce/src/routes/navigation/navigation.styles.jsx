@@ -27,18 +27,3 @@ export const NavLink = styled(Link)`
   padding: 10px 15px;
   cursor: pointer;
 `;
-
-// .navigation {
-
-//     .nav-links-container {
-//         width: 50%;
-//         height: 100%;
-//         display: flex;
-//         align-items: center;
-//         justify-content: flex-end;
-
-//         .nav-link {
-//             padding: 10px 15px;
-//             cursor: pointer;
-//         }
-//     }
