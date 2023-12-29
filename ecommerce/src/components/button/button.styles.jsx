@@ -24,6 +24,8 @@ export const BaseButton = styled.button`
   }
 `;
 
+// The rest of the styles will take a BaseButton and
+// override any styles respectively.
 export const GoogleSignInButton = styled(BaseButton)`
   background-color: #4285f4;
   color: white;

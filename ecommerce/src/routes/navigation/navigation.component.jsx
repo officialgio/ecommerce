@@ -16,8 +16,6 @@ import {
   LogoContainer,
 } from "./navigation.styles";
 
-// import "./navigation.styles.scss";
-
 // This is our top-level component
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
