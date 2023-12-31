@@ -32,3 +32,14 @@ a {
 * {
   box-sizing: border-box;
 }
+
+::-webkit-scrollbar {
+  width: 0.2em;
+}
+
+
+
+::-webkit-scrollbar-thumb {
+  background-color: black;
+  border-radius: 10vw;
+}
