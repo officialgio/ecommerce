@@ -9,11 +9,14 @@ import { CategoryContainer, CategoryTitle } from "./category.styles";
 const Category = () => {
   const { category } = useParams();
   const { categoriesMap } = useContext(CategoriesContext);
+
+  // Initial state must be set to the param endpoint
+  // Ex: /hats => categoriesMap[shoes]
   const [products, setProducts] = useState(categoriesMap[category]);
 
   useEffect(() => {
     // Set products only for the specific category from
-    // the specified param endpoint
+    // the specified param endpoint if there's changes to the data
     setProducts(categoriesMap[category]);
   }, [category, categoriesMap]);
 
