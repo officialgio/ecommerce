@@ -5,6 +5,8 @@ import {
   createUserDocumentFromAuth,
 } from "../utils/firebase/firebase.utils";
 
+import { createAction } from "../utils/reducer/reducer.utils";
+
 export const UserContext = createContext({
   currentUser: null,
   setCurrentUser: () => null,
@@ -14,10 +16,10 @@ export const USER_ACTION_TYPES = {
   SET_CURRENT_USER: "SET_CURRENT_USER",
 };
 
+// state is the INITIAL_STATE and action is the dispatch
 const userReducer = (state, action) => {
   const { type, payload } = action;
   console.log("dispatching user");
-  console.log(state);
 
   switch (type) {
     case USER_ACTION_TYPES.SET_CURRENT_USER:
@@ -35,11 +37,10 @@ const INITIAL_STATE = {
 };
 
 export const UserProvider = ({ children }) => {
-  // const [currentUser, setCurrentUser] = useState(null);
   const [{ currentUser }, dispatch] = useReducer(userReducer, INITIAL_STATE);
 
   const setCurrentUser = (user) => {
-    dispatch({ type: USER_ACTION_TYPES.SET_CURRENT_USER, payload: user });
+    dispatch(createAction(USER_ACTION_TYPES.SET_CURRENT_USER, user));
   };
 
   const value = { currentUser, setCurrentUser };
