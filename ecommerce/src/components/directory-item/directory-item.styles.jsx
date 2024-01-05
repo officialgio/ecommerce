@@ -8,6 +8,7 @@ export const BackgroundImage = styled.div`
 
   // Prop is passed here to obtain image
   background-image: ${({ imageUrl }) => `url(${imageUrl})`};
+  transition: all 250ms ease-in-out;
 `;
 
 export const Body = styled.div`
@@ -21,6 +22,7 @@ export const Body = styled.div`
   background-color: white;
   opacity: 0.7;
   position: absolute;
+  transition: all 250ms ease-in-out;
 
   h2 {
     font-weight: bold;
@@ -60,7 +62,6 @@ export const DirectoryItemContainer = styled.div`
 
     ${BackgroundImage} {
       transform: scale(1.1);
-      transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
     }
 
     ${Body} {
