@@ -1,40 +1,41 @@
 import { compose, createStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
 import { rootReducer } from "./root-reducer";
-import storage from 'redux-persist/lib/storage';
+import storage from "redux-persist/lib/storage";
 import persistReducer from "redux-persist/es/persistReducer";
 import persistStore from "redux-persist/es/persistStore";
 
-// runs before an action hits a reducer
-// This can take many types of middleware. Therefore, ensure to compose.
-// const middleware = [logger];
-
-const loggerMiddleware = (store) => (next) => (action) => {
-  if (!action.type) {
-    return next(action);
-  }
-
-  console.log("type: ", action.type);
-  console.log("payload: ", action.payload);
-  console.log("currentState: ", store.getState());
-
-  next(action);
-
-  console.log("next state: ", store.getState());
-};
-
 const persistConfig = {
-  key: 'root',
+  key: "root",
   storage,
-  blacklist: ['user'] // blaclist these reducers
-}
+  blacklist: ["user"], // blaclist these reducers
+};
 
 // Setup persisted reducer for the root reducer
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const composedEnhancers = compose(applyMiddleware(loggerMiddleware));
+// apply any middleware in the right env
+const middlewares = [process.env.NODE_ENV !== "production" && logger].filter(
+  Boolean
+);
+
+// apply redux devtools in the right env
+const composeEnhancer =
+  (process.env.NODE_ENV !== "production" &&
+    window &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+  compose;
+
+// This will take either compose or some composeEnhancer
+// If you're adding additional middleware, set up the enhancers accordingly.
+const composedEnhancers = composeEnhancer(applyMiddleware(...middlewares));
 
 // root reducer with redux add-ons
-export const store = createStore(persistedReducer, undefined, composedEnhancers);
+export const store = createStore(
+  persistedReducer,
+  undefined,
+  composedEnhancers
+);
 
+// The main store that will be available in index react app.
 export const persistor = persistStore(store);
