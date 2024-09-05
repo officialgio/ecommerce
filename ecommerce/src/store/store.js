@@ -1,5 +1,6 @@
 import { compose, createStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
+import { thunk } from 'redux-thunk';
 import { rootReducer } from "./root-reducer";
 import storage from "redux-persist/lib/storage";
 import persistReducer from "redux-persist/es/persistReducer";
@@ -15,7 +16,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // apply any middleware in the right env
-const middlewares = [process.env.NODE_ENV !== "production" && logger].filter(
+const middlewares = [process.env.NODE_ENV !== "production" && logger, thunk].filter(
   Boolean
 );
 
