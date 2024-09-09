@@ -40,7 +40,7 @@ provider.setCustomParameters({
 });
 
 export const auth = getAuth();
-export const signInWithGooglePopUp = () => signInWithPopup(auth, provider);
+export const signInWithGooglePopUp = () => signInWithPopup(auth, provider); // TODO: use redirect
 
 export const db = getFirestore();
 
@@ -98,7 +98,7 @@ export const createUserDocumentFromAuth = async (
       console.log(`Error creating the user: ${error.message}`);
     }
   }
-  return userDocRef;
+  return userSnapShot;
 };
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
@@ -117,3 +117,20 @@ export const signOutUser = async () => await signOut(auth);
 
 export const onAuthStateChangedListener = async (callback) =>
   onAuthStateChanged(auth, callback);
+
+/**
+ * A promisify version of checking if there's user state.
+ * @returns {Object} a user implementation.
+ */
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
+};

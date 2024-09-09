@@ -13,16 +13,18 @@ import {
   NavLink,
   LogoContainer,
 } from "./navigation.styles";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentUser } from "../../store/user/user.selector";
 import { selectIsCartOpen } from "../../store/cart/cart.selector";
+import { signOutStart } from "../../store/user/user.action";
 
 // This is our top-level component
 const Navigation = () => {
+  const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
-  const isCartOpen = useSelector(selectIsCartOpen)
+  const isCartOpen = useSelector(selectIsCartOpen);
 
-  // const { isCartOpen } = useContext(CartContext);
+  const signOutUser = () => dispatch(signOutStart());
 
   return (
     <Fragment>

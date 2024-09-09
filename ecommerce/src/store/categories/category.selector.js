@@ -34,18 +34,7 @@ export const selectCategoriesMap = createSelector(
     }, {})
 );
 
-/**
- * @deprecated
- * @param {Object} state
- * @returns our desirable data object
- */
-export const selectCategoriesMapDeprecated = (state) => {
-  const categoriesMap = state.categories.categories.reduce(
-    (acc, { title, items }) => {
-      acc[title.toLowerCase()] = items;
-      return acc;
-    },
-    {}
-  );
-  return categoriesMap;
-};
+export const selectCategoriesIsLoading = createSelector(
+  [selectCategoryReducer],
+  (categoriesSlice) => categoriesSlice.isLoading
+);
