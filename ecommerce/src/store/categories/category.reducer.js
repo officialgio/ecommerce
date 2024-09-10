@@ -24,7 +24,6 @@ export const categoriesReducer = (
         isLoading: false,
         categories: payload,
       };
-
     case CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_FAILED:
       return {
         ...state,
