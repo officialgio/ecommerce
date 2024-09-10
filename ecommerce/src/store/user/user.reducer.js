@@ -15,12 +15,12 @@ export const userSlice = createSlice({
   reducers: {
     setCurrentUser(state, action) {
       state.currentUser = action.payload;
-    }
-  }
-})
+    },
+  },
+});
 
 // action
-export const { setCurrentUser } = userSlice;
+export const { setCurrentUser } = userSlice.actions;
 
 // reducer
 export const userReducer = userSlice.reducer;

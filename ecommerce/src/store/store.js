@@ -5,7 +5,7 @@ import storage from "redux-persist/lib/storage";
 import persistReducer from "redux-persist/es/persistReducer";
 import persistStore from "redux-persist/es/persistStore";
 
-import configureStore from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 
 // const persistConfig = {
 //   key: "root",
@@ -35,7 +35,6 @@ const middlewares = [process.env.NODE_ENV !== "production" && logger].filter(
 // root reducer with redux add-ons
 export const store = configureStore({
   reducer: rootReducer,
-  // middleware: middlewares,
 });
 
 // // The main store that will be available in index react app.
