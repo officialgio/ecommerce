@@ -1,3 +1,4 @@
+import { createSlice } from "@reduxjs/toolkit";
 import USER_ACTION_TYPES from "./user.types";
 
 const INITIAL_STATE = {
@@ -5,22 +6,22 @@ const INITIAL_STATE = {
 };
 
 /**
- * This is the user reducer to override initial state. The function will
- * be used for the store object that will be globally available.
- * @param {Object} state
- * @param {Object} action
- * @returns {Object} new state with override props.
+ * The slice object that handles state management for user in
+ * the redux store.
  */
-export const userReducer = (state = INITIAL_STATE, action = {}) => {
-  const { type, payload } = action;
-
-  switch (type) {
-    case USER_ACTION_TYPES.SET_CURRENT_USER:
-      return {
-        ...state,
-        currentUser: payload,
-      };
-    default:
-      return state;
+export const userSlice = createSlice({
+  name: 'user',
+  initialState: INITIAL_STATE,
+  reducers: {
+    setCurrentUser(state, action) {
+      state.currentUser = action.payload;
+    }
   }
-};
+})
+
+// action
+export const { setCurrentUser } = userSlice;
+
+// reducer
+export const userReducer = userSlice.reducer;
+
