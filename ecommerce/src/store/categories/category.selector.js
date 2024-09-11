@@ -33,19 +33,3 @@ export const selectCategoriesMap = createSelector(
       return acc;
     }, {})
 );
-
-/**
- * @deprecated
- * @param {Object} state
- * @returns our desirable data object
- */
-export const selectCategoriesMapDeprecated = (state) => {
-  const categoriesMap = state.categories.categories.reduce(
-    (acc, { title, items }) => {
-      acc[title.toLowerCase()] = items;
-      return acc;
-    },
-    {}
-  );
-  return categoriesMap;
-};

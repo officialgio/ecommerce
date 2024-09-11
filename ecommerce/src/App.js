@@ -12,7 +12,6 @@ import {
   onAuthStateChangedListener,
   createUserDocumentFromAuth,
 } from "./utils/firebase/firebase.utils";
-import USER_ACTION_TYPES from "./store/user/user.types";
 
 const App = () => {
   const dispatch = useDispatch();

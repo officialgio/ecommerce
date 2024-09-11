@@ -35,6 +35,8 @@ const middlewares = [process.env.NODE_ENV !== "production" && logger].filter(
 // root reducer with redux add-ons
 export const store = configureStore({
   reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(middlewares),
 });
 
 // // The main store that will be available in index react app.
