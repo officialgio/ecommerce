@@ -5,11 +5,11 @@ import { Provider } from "react-redux";
 
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { persistor, store } from "./store/store";
+import { store } from "./store/store";
 import { Elements } from "@stripe/react-stripe-js";
 
 import "./index.scss";
-import { PersistGate } from "redux-persist/integration/react";
+// import { PersistGate } from "redux-persist/integration/react";
 import { stripePromise } from "./utils/stripe/stripe.util";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
