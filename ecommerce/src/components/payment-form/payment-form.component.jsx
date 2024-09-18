@@ -8,13 +8,28 @@ import { selectCurrentUser } from "../../store/user/user.selector";
 import { PaymentButton } from "./payment-form.styles";
 import { useState } from "react";
 
+/**
+ * PaymentForm component handles credit card payments using Stripe.
+ * It utilizes the Stripe elements and redux selectors to process payments.
+ */
 const PaymentForm = () => {
+  // Initialize Stripe and elements hooks
   const stripe = useStripe();
   const elements = useElements();
+
+  // Get the total cart amount and the current user from the Redux store
   const amount = useSelector(selectCartTotal);
   const currentUser = useSelector(selectCurrentUser);
+
+  // State to manage payment processing status
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
+  /**
+   * Handles the payment process triggered on form submission.
+   * It sends a request to the backend to create a payment intent, then confirms the card payment with Stripe.
+   *
+   * @param {React.FormEvent<HTMLFormElement>} e - The form submission event
+   */
   const paymentHandler = async (e) => {
     e.preventDefault();
 
@@ -24,7 +39,7 @@ const PaymentForm = () => {
 
     setIsProcessingPayment(true);
 
-    // One a request is sent, we get many
+    // Send request to backend to create a payment intent with the amount (in cents)
     const response = await fetch("/.netlify/functions/create-payment-intent", {
       method: "POST",
       headers: {
@@ -36,8 +51,8 @@ const PaymentForm = () => {
     const {
       paymentIntent: { client_secret },
     } = response;
-    console.log(client_secret);
 
+    // Confirm the payment with the client secret and card details
     const paymentResult = await stripe.confirmCardPayment(client_secret, {
       payment_method: {
         card: elements.getElement(CardElement),
@@ -49,6 +64,7 @@ const PaymentForm = () => {
 
     setIsProcessingPayment(false);
 
+    // Handle the result of the payment
     if (paymentResult.error) {
       alert(paymentResult.error);
     } else {
