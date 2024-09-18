@@ -1,2 +1,2 @@
 [build]
-  functions = "ecommerce/netlify/functions"
+  functions = "/netlify/functions"
