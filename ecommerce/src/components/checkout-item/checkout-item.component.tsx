@@ -1,4 +1,4 @@
-import { Context, useContext } from "react";
+import { Context, memo, useContext } from "react";
 
 import {
   CheckoutItemContainer,
@@ -22,7 +22,7 @@ type CheckItemProps = {
   cartItem: CartItem;
 };
 
-const CheckoutItem = ({ cartItem }: CheckItemProps) => {
+const CheckoutItem = memo(({ cartItem }: CheckItemProps) => {
   const { name, imageUrl, price, quantity } = cartItem;
 
   const cartItems = useSelector(selectCartItems);
@@ -52,6 +52,6 @@ const CheckoutItem = ({ cartItem }: CheckItemProps) => {
       <RemoveButton onClick={clearItemHandler}>&#10005;</RemoveButton>
     </CheckoutItemContainer>
   );
-};
+});
 
 export default CheckoutItem;
